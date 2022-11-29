@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd607c3f010ab45a29ecfcf8d5a898ef, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  ARCompanionAppIP: 192.168.2.16
+  ARCompanionAppIP: 192.168.0.
   arCompanionSettings:
     cameraVideoSettings:
       enableVideo: 1
@@ -38,10 +38,25 @@ MonoBehaviour:
   editorGameViewSettings:
     resolutionScale: 0.33333334
     maxEditorViewFps: 10
-  packages: []
+  packages:
+  - displayName: AR Foundation Remote
+    version: 2.0.27-release.0
+    id: com.kyrylokuzyk.arfoundationremote
+  - displayName: AR Foundation
+    version: 5.1.0-pre.2
+    id: com.unity.xr.arfoundation
+  - displayName: Google ARCore XR Plugin
+    version: 5.1.0-pre.2
+    id: com.unity.xr.arcore
+  - displayName: Apple ARKit XR Plugin
+    version: 5.1.0-pre.2
+    id: com.unity.xr.arkit
+  - displayName: Input System
+    version: 1.4.2
+    id: com.unity.inputsystem
   inputHandlingData:
-    isLegacyInputManagerEnabled: 0
-    isNewInputSystemEnabled: 0
+    isLegacyInputManagerEnabled: 1
+    isNewInputSystemEnabled: 1
   debugSettings:
     logStartupErrors: 1
     showTelepathyLogs: 0
