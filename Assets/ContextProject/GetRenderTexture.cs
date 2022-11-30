@@ -12,6 +12,7 @@ public class GetRenderTexture : MonoBehaviour
     public CpuImageSample cpuImage;
     public bool depthFlag;
 
+    public int width=1280, heigh=720;
     //public Texture2D cameraTexture;
     //public Texture2D DepthTexture;
     //public RenderTexture thisCameraTexture;
@@ -26,20 +27,22 @@ public class GetRenderTexture : MonoBehaviour
     {
         
 
-        if(cpuImage.m_CameraTexture!=null)
-            cpuImage.m_CameraTexture = ScaleTexture(cpuImage.m_CameraTexture, 1920, 1080);
-
+        
 
         if (depthFlag == true)
         {
+            /*
             if (cpuImage.m_DepthTexture != null)
-                cpuImage.m_DepthTexture = ScaleTexture(cpuImage.m_DepthTexture, 1920, 1080);
+                cpuImage.m_DepthTexture = ScaleTexture(cpuImage.m_DepthTexture, width, heigh);
+            */
             ndiSenderCamera.sourceTexture = cpuImage.m_DepthTexture;
         }
         else
         {
+            /*
             if (cpuImage.m_CameraTexture != null)
                 cpuImage.m_CameraTexture = ScaleTexture(cpuImage.m_CameraTexture, 1920, 1080);
+            */
             ndiSenderCamera.sourceTexture = cpuImage.m_CameraTexture;
         }
         

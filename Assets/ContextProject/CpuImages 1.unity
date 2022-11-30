@@ -2662,7 +2662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ndiSenderCamera: {fileID: 930863108}
   cpuImage: {fileID: 1141330382}
-  depthFlag: 1
+  depthFlag: 0
 --- !u!4 &1060251050
 Transform:
   m_ObjectHideFlags: 0
