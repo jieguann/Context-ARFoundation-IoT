@@ -2663,6 +2663,9 @@ MonoBehaviour:
   ndiSenderCamera: {fileID: 930863108}
   cpuImage: {fileID: 1141330382}
   depthFlag: 0
+  width: 0
+  heigh: 0
+  depthPixels: []
 --- !u!4 &1060251050
 Transform:
   m_ObjectHideFlags: 0
@@ -3935,6 +3938,75 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1001 &1681838935
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8306982129227585257, guid: d843739baa752c948b1da293164047ef,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306982129227585257, guid: d843739baa752c948b1da293164047ef,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306982129227585257, guid: d843739baa752c948b1da293164047ef,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306982129227585257, guid: d843739baa752c948b1da293164047ef,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306982129227585257, guid: d843739baa752c948b1da293164047ef,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306982129227585257, guid: d843739baa752c948b1da293164047ef,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306982129227585257, guid: d843739baa752c948b1da293164047ef,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306982129227585257, guid: d843739baa752c948b1da293164047ef,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306982129227585257, guid: d843739baa752c948b1da293164047ef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306982129227585257, guid: d843739baa752c948b1da293164047ef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306982129227585257, guid: d843739baa752c948b1da293164047ef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8306982129227585263, guid: d843739baa752c948b1da293164047ef,
+        type: 3}
+      propertyPath: m_Name
+      value: MQTT
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d843739baa752c948b1da293164047ef, type: 3}
 --- !u!224 &1756864493 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2304810881573073946, guid: 4ee22c1f54b174122b6a766fe09e0de8,
