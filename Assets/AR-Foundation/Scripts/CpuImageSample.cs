@@ -33,7 +33,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
     {
 
         public Texture2D m_CameraTexture;
-        public Texture m_DepthTexture;
+        public Texture2D m_DepthTexture;
 
         [SerializeField]
         [Tooltip("The ARCameraManager which will produce frame events.")]
@@ -284,7 +284,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 using (image)
                 {
-                    m_DepthTexture = UpdateRawImage(m_RawEnvironmentDepthImage, image, m_Transformation);
+                    m_DepthTexture = UpdateRawImage(m_RawEnvironmentDepthImage, image, m_Transformation) as Texture2D;
                 }
             }
             else
