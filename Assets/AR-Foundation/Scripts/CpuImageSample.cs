@@ -31,6 +31,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
     /// </summary>
     public class CpuImageSample : MonoBehaviour
     {
+
+        public Texture2D m_CameraTexture;
+        public Texture m_DepthTexture;
+
         [SerializeField]
         [Tooltip("The ARCameraManager which will produce frame events.")]
         ARCameraManager m_CameraManager;
@@ -280,7 +284,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             {
                 using (image)
                 {
-                    UpdateRawImage(m_RawEnvironmentDepthImage, image, m_Transformation);
+                    m_DepthTexture = UpdateRawImage(m_RawEnvironmentDepthImage, image, m_Transformation);
                 }
             }
             else
@@ -309,7 +313,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             }
         }
 
-        static void UpdateRawImage(RawImage rawImage, XRCpuImage cpuImage, XRCpuImage.Transformation transformation)
+        static Texture UpdateRawImage(RawImage rawImage, XRCpuImage cpuImage, XRCpuImage.Transformation transformation)
         {
             // Get the texture associated with the UI.RawImage that we wish to display on screen.
             var texture = rawImage.texture as Texture2D;
@@ -342,6 +346,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             // Make sure it's enabled.
             rawImage.enabled = true;
+            return texture;
         }
 
         void OnCameraFrameReceived(ARCameraFrameEventArgs eventArgs)
@@ -353,6 +358,6 @@ namespace UnityEngine.XR.ARFoundation.Samples
             UpdateEnvironmentDepthConfidenceImage();
         }
 
-        Texture2D m_CameraTexture;
+        
     }
 }
