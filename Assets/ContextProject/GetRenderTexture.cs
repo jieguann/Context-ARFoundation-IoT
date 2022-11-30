@@ -13,6 +13,8 @@ public class GetRenderTexture : MonoBehaviour
     public bool depthFlag;
 
     public int width=1280, heigh=720;
+
+    public Color[] depthPixels;
     //public Texture2D cameraTexture;
     //public Texture2D DepthTexture;
     //public RenderTexture thisCameraTexture;
@@ -45,8 +47,10 @@ public class GetRenderTexture : MonoBehaviour
             */
             ndiSenderCamera.sourceTexture = cpuImage.m_CameraTexture;
         }
-        
+
         //ndiSenderDepth.sourceTexture = cpuImage.m_DepthTexture;
+
+        depthPixels = cpuImage.m_DepthTexture.GetPixels();
     }
 
     private Texture2D ScaleTexture(Texture2D source, int targetWidth, int targetHeight)
