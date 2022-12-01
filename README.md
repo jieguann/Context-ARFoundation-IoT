@@ -1,5 +1,11 @@
 # AR Foundation Samples
 
+#Setup
+Seletct 1920 x 1080 on the left corner on mobile device
+Open tensorflow.js device and select NDI as input
+Make sure they connected on same network
+
+
 Example AR scenes that use [AR Foundation 5.1](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@5.1/manual/index.html) and demonstrate its features. Each feature is used in a minimal sample scene with example code that you can modify or copy into your project.
 
 This sample project depends on four Unity packages:
