@@ -41,7 +41,7 @@ namespace M2MqttUnity.Examples
 
         public void DepthPublish()
         {
-            if (texture.classVelue != null)
+            if (texture.classVelue.depthValue.Count>0)
             {
                 client.Publish("ACE/Lab", System.Text.Encoding.UTF8.GetBytes(JsonUtility.ToJson(texture.classVelue)), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
             }

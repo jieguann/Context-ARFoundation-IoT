@@ -2663,9 +2663,11 @@ MonoBehaviour:
   ndiSenderCamera: {fileID: 930863108}
   cpuImage: {fileID: 1141330382}
   depthFlag: 0
-  width: 0
-  heigh: 0
+  width: 1920
+  heigh: 1080
   depthPixels: []
+  classVelue:
+    depthValue: []
 --- !u!4 &1060251050
 Transform:
   m_ObjectHideFlags: 0
