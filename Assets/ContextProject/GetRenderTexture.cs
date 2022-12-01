@@ -9,6 +9,7 @@ using System;
 
 public class GetRenderTexture : MonoBehaviour
 {
+    public MQTTTest mqtt;
     public NdiSender ndiSenderCamera;
     //public NdiSender ndiSenderDepth;
     public CpuImageSample cpuImage;
@@ -18,30 +19,40 @@ public class GetRenderTexture : MonoBehaviour
 
     public Color[] depthPixels;
     //public List<float> depthValue;
-
     [Serializable]
-    public class depthClass
+    public class objectDetection
     {
-        public List<float> depthValue=new List<float>();
+        public string name;
+        public int x;
+        public int y;
+
+
     }
-    public depthClass classVelue = new depthClass();
+    [Serializable]
+    public class objectToSend
+    {
+        public string name;
+        public float x;
+        public float y;
+        public float d;
+    }
+
+    
+    public objectToSend objectSend;
+
+
     void Start()
     {
-        
-        //classVelue.depthValue
-        for(int i = 0; i < width * heigh; i++)
-        {
-            classVelue.depthValue.Add(0f);
-            print(classVelue.depthValue);
-        }
+
+        objectSend = new objectToSend();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
 
-        
+        if (cpuImage.m_DepthTexture != null)
+            depthPixels = cpuImage.m_DepthTexture.GetPixels();
 
         if (depthFlag == true)
         {
@@ -60,29 +71,40 @@ public class GetRenderTexture : MonoBehaviour
             ndiSenderCamera.sourceTexture = cpuImage.m_CameraTexture;
         }
 
-        //ndiSenderDepth.sourceTexture = cpuImage.m_DepthTexture;
-        if (cpuImage.m_DepthTexture != null)
+        if (mqtt.objectDetection != null && depthPixels.Length>0)
         {
-            depthPixels = cpuImage.m_DepthTexture.GetPixels();
-            for (int i = 0; i < classVelue.depthValue.Count; i++)
-            {
-                classVelue.depthValue[i] = depthPixels[i].r;
-            }
+            var myObject = JsonUtility.FromJson<objectDetection>(mqtt.objectDetection);
+            objectSend.x = Remap(myObject.x, 0, cpuImage.m_CameraTexture.width, 0, 1);
+            objectSend.y = Remap(myObject.y, 0, cpuImage.m_CameraTexture.height, 0, 1);
 
-
-            Debug.Log(JsonUtility.ToJson(classVelue));
-            //string jsonString = JsonUtility.ToJson(classVelue);
-            
+            var depthIndex = ((int)(objectSend.y * cpuImage.m_DepthTexture.height)-1) * cpuImage.m_DepthTexture.width + (int)(objectSend.x * cpuImage.m_DepthTexture.width);
+            objectSend.d = depthPixels[depthIndex].r;
         }
-           
-
-
-
 
     }
+
+
+    float Remap(float from, float fromMin, float fromMax, float toMin, float toMax)
+    {
+        var fromAbs = from - fromMin;
+        var fromMaxAbs = fromMax - fromMin;
+
+        var normal = fromAbs / fromMaxAbs;
+
+        var toMaxAbs = toMax - toMin;
+        var toAbs = toMaxAbs * normal;
+
+        var to = toAbs + toMin;
+
+        return to;
+    }
+
+
 
     
 
 
 
 }
+
+

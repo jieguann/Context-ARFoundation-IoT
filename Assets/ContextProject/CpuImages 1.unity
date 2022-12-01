@@ -2660,14 +2660,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397bb0540031840369face7d83fa75ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mqtt: {fileID: 1467061063}
   ndiSenderCamera: {fileID: 930863108}
   cpuImage: {fileID: 1141330382}
   depthFlag: 0
   width: 1920
   heigh: 1080
   depthPixels: []
-  classVelue:
-    depthValue: []
 --- !u!4 &1060251050
 Transform:
   m_ObjectHideFlags: 0
@@ -3595,6 +3594,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456894439}
   m_CullTransparentMesh: 0
+--- !u!114 &1467061063 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8306982129227585262, guid: d843739baa752c948b1da293164047ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 1681838935}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74eb70384da2c634aad110923092eb4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1474869891
 GameObject:
   m_ObjectHideFlags: 0

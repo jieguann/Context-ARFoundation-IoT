@@ -28,26 +28,20 @@ namespace M2MqttUnity.Examples
 
         private List<string> eventMessages = new List<string>();
         private bool updateUI = false;
-        
 
-         
-        public float seconds = 0f;
-        public float minutes = 0f;
-        //public float totalSeconds = 0f;
-        public bool cellPhone = false;
-        public bool teddyBear = false;
-        public bool wineGlass = false;
+
+
+        public string objectDetection;
 
 
         public void DepthPublish()
         {
-            if (texture.classVelue.depthValue.Count>0)
+            if (texture.objectSend != null&&client!=null)
             {
-                client.Publish("ACE/Lab", System.Text.Encoding.UTF8.GetBytes(JsonUtility.ToJson(texture.classVelue)), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+                client.Publish("AceLab/ObjectValue", System.Text.Encoding.UTF8.GetBytes(JsonUtility.ToJson(texture.objectSend)), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
             }
-            
-            //print("Test message published");
-            //AddUiMessage("Test message published.");
+                
+
         }
 
         public void SetBrokerAddress(string brokerAddress)
@@ -93,11 +87,8 @@ namespace M2MqttUnity.Examples
 
         protected override void SubscribeTopics()
         {
-            client.Subscribe(new string[] { "jieThesis/Oculus/seconds" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-            client.Subscribe(new string[] { "jieThesis/Oculus/minutes" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-            client.Subscribe(new string[] { "jieThesis/Oculus/cellPhone" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-            client.Subscribe(new string[] { "jieThesis/Oculus/teddyBear" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-            client.Subscribe(new string[] { "jieThesis/Oculus/wineGlass" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+            client.Subscribe(new string[] { "AceLab/Bottle" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+            
 
         }
 
@@ -136,44 +127,14 @@ namespace M2MqttUnity.Examples
             StoreMessage(msg);
             //Data = JsonMapper.ToObject(msg);
 
-            if (topic == "jieThesis/Oculus/seconds")
+            if (topic == "AceLab/Bottle")
             {
-                //print("1: " + Single.Parse(msg));
-                //print(msg.GetType());
-                seconds = Single.Parse(msg);
-                //print("seconds: "+ seconds);
+                
+               objectDetection = msg;
+                
             }
 
-            if (topic == "jieThesis/Oculus/minutes")
-            {
-                //print("1: " + Single.Parse(msg));
-                //print(msg.GetType());
-                minutes = Single.Parse(msg);
-                //print("minutes: " + minutes);
-            }
-
-            if (topic == "jieThesis/Oculus/cellPhone")
-            {
-                //print("1: " + Single.Parse(msg));
-                //print(msg.GetType());
-                cellPhone = bool.Parse(msg);
-                //print("cell phone: " + cellPhone);
-            }
-
-            if (topic == "jieThesis/Oculus/teddyBear")
-            {
-                //print("1: " + Single.Parse(msg));
-                //print(msg.GetType());
-                teddyBear = bool.Parse(msg);
-                //print("cell phone: " + cellPhone);
-            }
-            if (topic == "jieThesis/Oculus/wineGlass")
-            {
-                //print("1: " + Single.Parse(msg));
-                //print(msg.GetType());
-                wineGlass = bool.Parse(msg);
-                //print("cell phone: " + cellPhone);
-            }
+            
 
 
 
@@ -193,6 +154,7 @@ namespace M2MqttUnity.Examples
         protected override void Update()
         {
             base.Update(); // call ProcessMqttEvents()
+            //DepthPublish();
             DepthPublish();
 
 
