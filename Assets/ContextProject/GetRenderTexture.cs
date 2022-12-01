@@ -31,10 +31,10 @@ public class GetRenderTexture : MonoBehaviour
     [Serializable]
     public class objectToSend
     {
-        public string name;
-        public float x;
-        public float y;
-        public float d;
+        public string name="bottle";
+        public float x=0;
+        public float y=0;
+        public float d=0;
     }
 
     
@@ -74,11 +74,21 @@ public class GetRenderTexture : MonoBehaviour
         if (mqtt.objectDetection != null && depthPixels.Length>0)
         {
             var myObject = JsonUtility.FromJson<objectDetection>(mqtt.objectDetection);
-            objectSend.x = Remap(myObject.x, 0, cpuImage.m_CameraTexture.width, 0, 1);
-            objectSend.y = Remap(myObject.y, 0, cpuImage.m_CameraTexture.height, 0, 1);
+            if (myObject != null)
+            {
+                
+                objectSend.x = Remap(myObject.x, 0, cpuImage.m_CameraTexture.width, 0, 1);
+                objectSend.y = Remap(myObject.y, 0, cpuImage.m_CameraTexture.height, 0, 1);
 
-            var depthIndex = ((int)(objectSend.y * cpuImage.m_DepthTexture.height)-1) * cpuImage.m_DepthTexture.width + (int)(objectSend.x * cpuImage.m_DepthTexture.width);
-            objectSend.d = depthPixels[depthIndex].r;
+                if(objectSend.x>0&& objectSend.y > 0)
+                {
+                    var depthIndex = ((int)(objectSend.y * cpuImage.m_DepthTexture.height) - 1) * cpuImage.m_DepthTexture.width + (int)(objectSend.x * cpuImage.m_DepthTexture.width);
+                    //Debug.Log(depthIndex);
+                    objectSend.d = depthPixels[depthIndex].r;
+                }
+                
+            }
+            
         }
 
     }
