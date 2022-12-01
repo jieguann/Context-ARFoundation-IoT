@@ -72,6 +72,7 @@ namespace UnityEngine.XR.ARFoundation.Samples
             m_Dropdown.ClearOptions();
             m_Dropdown.onValueChanged.AddListener(delegate { OnDropdownValueChanged(m_Dropdown); });
             m_ConfigurationNames = new List<string>();
+            m_Dropdown.value = 3;
         }
 
         void PopulateDropdown()

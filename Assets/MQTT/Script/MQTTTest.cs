@@ -20,6 +20,8 @@ namespace M2MqttUnity.Examples
     /// </summary>
     public class MQTTTest : M2MqttUnityClient
     {
+        public GetRenderTexture texture;
+
         [Tooltip("Set this to true to perform a testing cycle automatically on startup")]
         public bool autoTest = false;
        
@@ -37,10 +39,14 @@ namespace M2MqttUnity.Examples
         public bool wineGlass = false;
 
 
-        public void TestPublish()
+        public void DepthPublish()
         {
-            client.Publish("M2MQTT_Unity/test", System.Text.Encoding.UTF8.GetBytes("Test message"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
-            print("Test message published");
+            if (texture.classVelue != null)
+            {
+                client.Publish("ACE/Lab", System.Text.Encoding.UTF8.GetBytes(JsonUtility.ToJson(texture.classVelue)), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+            }
+            
+            //print("Test message published");
             //AddUiMessage("Test message published.");
         }
 
@@ -81,7 +87,7 @@ namespace M2MqttUnity.Examples
 
             if (autoTest)
             {
-                TestPublish();
+                DepthPublish();
             }
         }
 
@@ -187,7 +193,9 @@ namespace M2MqttUnity.Examples
         protected override void Update()
         {
             base.Update(); // call ProcessMqttEvents()
-           
+            DepthPublish();
+
+
         }
 
         private void OnDestroy()

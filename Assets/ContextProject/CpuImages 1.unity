@@ -4000,6 +4000,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8306982129227585262, guid: d843739baa752c948b1da293164047ef,
+        type: 3}
+      propertyPath: texture
+      value: 
+      objectReference: {fileID: 1060251049}
+    - target: {fileID: 8306982129227585262, guid: d843739baa752c948b1da293164047ef,
+        type: 3}
+      propertyPath: brokerAddress
+      value: mqtt.eclipseprojects.io
+      objectReference: {fileID: 0}
     - target: {fileID: 8306982129227585263, guid: d843739baa752c948b1da293164047ef,
         type: 3}
       propertyPath: m_Name

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation.Samples;
 using Klak.Ndi;
+using M2MqttUnity.Examples;
+using System;
 //https://gist.github.com/openroomxyz/b7221ed30a0a0e04c32ae6d5fa948ac9
 
 public class GetRenderTexture : MonoBehaviour
@@ -12,16 +14,26 @@ public class GetRenderTexture : MonoBehaviour
     public CpuImageSample cpuImage;
     public bool depthFlag;
 
-    public int width=1280, heigh=720;
+    public int width=1920, heigh=1080;
 
     public Color[] depthPixels;
-    //public Texture2D cameraTexture;
-    //public Texture2D DepthTexture;
-    //public RenderTexture thisCameraTexture;
-    // Start is called before the first frame update
+    //public List<float> depthValue;
+
+    [Serializable]
+    public class depthClass
+    {
+        public List<float> depthValue=new List<float>();
+    }
+    public depthClass classVelue = new depthClass();
     void Start()
     {
         
+        //classVelue.depthValue
+        for(int i = 0; i < width * heigh; i++)
+        {
+            classVelue.depthValue.Add(0f);
+            print(classVelue.depthValue);
+        }
     }
 
     // Update is called once per frame
@@ -49,26 +61,27 @@ public class GetRenderTexture : MonoBehaviour
         }
 
         //ndiSenderDepth.sourceTexture = cpuImage.m_DepthTexture;
-
-        depthPixels = cpuImage.m_DepthTexture.GetPixels();
-    }
-
-    private Texture2D ScaleTexture(Texture2D source, int targetWidth, int targetHeight)
-    {
-        Texture2D result = new Texture2D(targetWidth, targetHeight, source.format, false);
-        float incX = (1.0f / (float)targetWidth);
-        float incY = (1.0f / (float)targetHeight);
-        for (int i = 0; i < result.height; ++i)
+        if (cpuImage.m_DepthTexture != null)
         {
-            for (int j = 0; j < result.width; ++j)
+            depthPixels = cpuImage.m_DepthTexture.GetPixels();
+            for (int i = 0; i < classVelue.depthValue.Count; i++)
             {
-                Color newColor = source.GetPixelBilinear((float)j / (float)result.width, (float)i / (float)result.height);
-                result.SetPixel(j, i, newColor);
+                classVelue.depthValue[i] = depthPixels[i].r;
             }
+
+
+            Debug.Log(JsonUtility.ToJson(classVelue));
+            //string jsonString = JsonUtility.ToJson(classVelue);
+            
         }
-        result.Apply();
-        return result;
+           
+
+
+
+
     }
+
+    
 
 
 
