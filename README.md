@@ -14,3 +14,5 @@ https://github.com/jieguann/XRI-Agent-Avatar-Design-Prototype-ACELab
 
 ## Webcame ML5.js Object Detection and PoseNet
 Send all the name and positino of objects and PoseNet point through MQTT.
+
+PoseNet Key point https://github.com/tensorflow/tfjs-models/tree/master/pose-detection
