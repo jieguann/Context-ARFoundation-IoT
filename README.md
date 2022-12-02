@@ -11,3 +11,6 @@ https://github.com/jieguann/XRI-Agent-Avatar-Design-Prototype-ACELab
 ## Phone Application Setup
 * Change resolution to 1920 x 1080 at the left botton.
 * Set iphone to auto rotate in the setting, and turn it to landscape mode.
+
+## Webcame ML5.js Object Detection and PoseNet
+Send all the name and positino of objects and PoseNet point through MQTT.
