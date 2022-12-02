@@ -22,7 +22,11 @@ const widthC = 1920;
 const heightC = 1080;
 
 //Json Object
-let jsonObject = {name:"bottle",x:0,y:0}
+
+let handLeft = {name:"left hand", x:0,y:0};
+let handRight = {name:"right hand",x:0,y:0};
+let head = {name:"right hand",x:0,y:0};
+
 
 //MQTT
 const mqttTitle = "AceLab"
@@ -92,16 +96,16 @@ function drawDetection(){
     object = detections[i];
 
 
-    if(object.label=="cup"){
+    
 
 
       stroke(0, 255, 0);
       strokeWeight(4);
       noFill();
       rect(object.x, object.y, object.width, object.height);
-      jsonObject.x = object.x+object.width/2;
-      jsonObject.y = object.y+object.height/2;
-
+      //cupObject.x = object.x+object.width/2;
+      //cupObject.y = object.y+object.height/2;
+      //cupObject.name = "cup";
       noStroke();
       fill(255);
       textSize(24);
@@ -110,20 +114,14 @@ function drawDetection(){
       text(object.label, object.x + 10, object.y + 24);
       
        
-      }
+      sendPositionMQTT(object.label,object.x,object.y);
       
-    client.publish(mqttTitle + '/Bottle', JSON.stringify(jsonObject), { qos: 0, retain: false });
-
-    //client.publish(mqttTitle +'/Oculus/minutes', minutes.toString(), { qos: 0, retain: false });
-    
-    
-    
-  
-}
-
-   
+    //client.publish(mqttTitle + '/cup', JSON.stringify(cupObject), { qos: 0, retain: false });
 
 }
+}
+
+
 
 // A function to draw ellipses over the detected keypoints
 function drawKeypoints() {
@@ -139,10 +137,23 @@ function drawKeypoints() {
         fill(255, 0, 0);
         noStroke();
         ellipse(keypoint.position.x, keypoint.position.y, 30, 30);
+        sendPositionMQTT("poseNet/"+i.toString() + "/" + j.toString(),keypoint.position.x, keypoint.position.y)
       }
     }
   }
 }
+
+//publish to mqtt functino
+function sendPositionMQTT(name,x,y){
+  var detectedObject = {name:"",x:0,y:0};
+  detectedObject.name = name;
+  detectedObject.x = x;
+  detectedObject.y = y;
+  client.publish(mqttTitle + "/"+name, JSON.stringify(detectedObject), { qos: 0, retain: false });
+}
+
+
+
 
 function drawSkeleton() {
   // Loop through all the skeletons detected
@@ -157,6 +168,8 @@ function drawSkeleton() {
     }
   }
 }
+
+
 
 
 
