@@ -2827,6 +2827,7 @@ MonoBehaviour:
     y: 0
     d: 0
   dist: 0
+  distanceText: {fileID: 1839112109}
 --- !u!4 &1060251050
 Transform:
   m_ObjectHideFlags: 0

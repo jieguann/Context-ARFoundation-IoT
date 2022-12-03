@@ -43,7 +43,7 @@ namespace M2MqttUnity.Examples
             {
 
                client.Publish("AceLab/ObjectValue", System.Text.Encoding.UTF8.GetBytes(JsonUtility.ToJson(texture.cupObject)), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
-               client.Publish("AceLab/ObjectValue", System.Text.Encoding.UTF8.GetBytes(texture.dist.ToString()), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+               client.Publish("AceLab/Distance", System.Text.Encoding.UTF8.GetBytes(texture.dist.ToString()), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
 
             }
                 
