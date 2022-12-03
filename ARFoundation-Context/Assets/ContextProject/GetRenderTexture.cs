@@ -5,6 +5,7 @@ using UnityEngine.XR.ARFoundation.Samples;
 using Klak.Ndi;
 using M2MqttUnity.Examples;
 using System;
+using TMPro;
 //https://gist.github.com/openroomxyz/b7221ed30a0a0e04c32ae6d5fa948ac9
 
 public class GetRenderTexture : MonoBehaviour
@@ -41,6 +42,7 @@ public class GetRenderTexture : MonoBehaviour
     public objectToSend cupObject;
     public objectToSend nose;
     public float dist;
+    public TMP_Text distanceText;
 
 
     void Start()
@@ -81,6 +83,7 @@ public class GetRenderTexture : MonoBehaviour
                 new Vector3(cupObject.x,cupObject.y,cupObject.d),
                 new Vector3(nose.x,nose.y,nose.d)
                 );
+            distanceText.text = "Distance: " + dist.ToString();
 
         }
         
