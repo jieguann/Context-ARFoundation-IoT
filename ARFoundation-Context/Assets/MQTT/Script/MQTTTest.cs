@@ -31,14 +31,20 @@ namespace M2MqttUnity.Examples
 
 
 
-        public string objectDetection;
+        public string cupDetection;
+        public string leftHand;//10
+        public string rightHand;//9
+        public string nose;//0
 
 
         public void DepthPublish()
         {
-            if (texture.objectSend != null&&client!=null)
+            if (texture.cupObject != null&&client!=null)
             {
-                client.Publish("AceLab/ObjectValue", System.Text.Encoding.UTF8.GetBytes(JsonUtility.ToJson(texture.objectSend)), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+
+               client.Publish("AceLab/ObjectValue", System.Text.Encoding.UTF8.GetBytes(JsonUtility.ToJson(texture.cupObject)), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+               client.Publish("AceLab/ObjectValue", System.Text.Encoding.UTF8.GetBytes(texture.dist.ToString()), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+
             }
                 
 
@@ -87,8 +93,10 @@ namespace M2MqttUnity.Examples
 
         protected override void SubscribeTopics()
         {
-            client.Subscribe(new string[] { "AceLab/Bottle" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-            
+            client.Subscribe(new string[] { "AceLab/objectDetection/cup" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+            // node AceLab/poseNet/0/0
+            client.Subscribe(new string[] { "AceLab/poseNet/0/0" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+
 
         }
 
@@ -127,16 +135,19 @@ namespace M2MqttUnity.Examples
             StoreMessage(msg);
             //Data = JsonMapper.ToObject(msg);
 
-            if (topic == "AceLab/Bottle")
+            if (topic == "AceLab/objectDetection/cup")
             {
                 
-               objectDetection = msg;
-                
+               cupDetection = msg;
+
             }
+            //AceLab/poseNet/0/0
+            if (topic == "AceLab/poseNet/0/0")
+            {
 
-            
+                nose = msg;
 
-
+            }
 
         }
 

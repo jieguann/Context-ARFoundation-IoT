@@ -2779,7 +2779,7 @@ MonoBehaviour:
   heigh: 1080
   depthPixels: []
   objectSend:
-    name: bottle
+    name: cup
     x: 0
     y: 0
     d: 0
@@ -3732,7 +3732,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1468811442}
   m_Layer: 0
-  m_Name: ObjectDetection
+  m_Name: VideoDetection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

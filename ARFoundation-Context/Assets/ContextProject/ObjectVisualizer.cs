@@ -15,7 +15,7 @@ public class ObjectVisualizer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        position = new Vector3(texture.objectSend.x*Screen.width, texture.objectSend.y*Screen.height, texture.objectSend.d);
+        position = new Vector3(texture.cupObject.x*Screen.width, texture.cupObject.y*Screen.height, texture.cupObject.d);
         transform.position = Camera.main.ScreenToWorldPoint(position);
     }
 }

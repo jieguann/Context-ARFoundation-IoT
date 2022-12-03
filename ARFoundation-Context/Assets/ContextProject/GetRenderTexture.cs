@@ -31,20 +31,23 @@ public class GetRenderTexture : MonoBehaviour
     [Serializable]
     public class objectToSend
     {
-        public string name="bottle";
+        public string name="";
         public float x=0;
         public float y=0;
         public float d=0;
     }
 
     
-    public objectToSend objectSend;
+    public objectToSend cupObject;
+    public objectToSend nose;
+    public float dist;
 
 
     void Start()
     {
 
-        objectSend = new objectToSend();
+        cupObject = new objectToSend();
+        nose = new objectToSend();
     }
 
     // Update is called once per frame
@@ -70,27 +73,41 @@ public class GetRenderTexture : MonoBehaviour
             */
             ndiSenderCamera.sourceTexture = cpuImage.m_CameraTexture;
         }
-
-        if (mqtt.objectDetection != null && depthPixels.Length>0)
+        if(depthPixels.Length > 0)
         {
-            var myObject = JsonUtility.FromJson<objectDetection>(mqtt.objectDetection);
+            detection(mqtt.cupDetection, cupObject);
+            detection(mqtt.nose, nose);
+            dist = Vector3.Distance(
+                new Vector3(cupObject.x,cupObject.y,cupObject.d),
+                new Vector3(nose.x,nose.y,nose.d)
+                );
+
+        }
+        
+
+    }
+
+    void detection(string detection, objectToSend send)
+    {
+        if (detection != null)
+        {
+            var myObject = JsonUtility.FromJson<objectDetection>(detection);
             if (myObject != null)
             {
-                
-                objectSend.x = Remap(myObject.x, 0, cpuImage.m_CameraTexture.width, 0, 1);
-                objectSend.y = Remap(myObject.y, 0, cpuImage.m_CameraTexture.height, 0, 1);
 
-                if(objectSend.x>0&& objectSend.y > 0)
+                send.x = Remap(myObject.x, 0, cpuImage.m_CameraTexture.width, 0, 1);
+                send.y = Remap(myObject.y, 0, cpuImage.m_CameraTexture.height, 0, 1);
+
+                if (send.x > 0 && send.y > 0)
                 {
-                    var depthIndex = ((int)(objectSend.y * cpuImage.m_DepthTexture.height) - 1) * cpuImage.m_DepthTexture.width + (int)(objectSend.x * cpuImage.m_DepthTexture.width);
+                    var depthIndex = ((int)(send.y * cpuImage.m_DepthTexture.height) - 1) * cpuImage.m_DepthTexture.width + (int)(send.x * cpuImage.m_DepthTexture.width);
                     //Debug.Log(depthIndex);
-                    objectSend.d = depthPixels[depthIndex].r;
+                    send.d = depthPixels[depthIndex].r;
                 }
-                
-            }
-            
-        }
 
+            }
+
+        }
     }
 
 
@@ -108,6 +125,8 @@ public class GetRenderTexture : MonoBehaviour
 
         return to;
     }
+
+
 
 
 

@@ -21,11 +21,6 @@ let poses = [];
 const widthC = 1920;
 const heightC = 1080;
 
-//Json Object
-
-let handLeft = {name:"left hand", x:0,y:0};
-let handRight = {name:"right hand",x:0,y:0};
-let head = {name:"right hand",x:0,y:0};
 
 
 //MQTT
@@ -76,7 +71,7 @@ function draw() {
   //set up vide
   image(video, 0, 0, width, height);
   //draw object
-  drawDetection();
+  objectDetection();
   //draw post
   drawKeypoints();
   drawSkeleton();
@@ -88,7 +83,7 @@ function draw() {
 }
 
 //object function
-function drawDetection(){
+function objectDetection(){
   
   
   for (let i = 0; i < detections.length; i++) {
@@ -114,7 +109,7 @@ function drawDetection(){
       text(object.label, object.x + 10, object.y + 24);
       
        
-      sendPositionMQTT(object.label,object.x,object.y);
+      sendPositionMQTT("objectDetection/"+object.label,object.x,object.y);
       
     //client.publish(mqttTitle + '/cup', JSON.stringify(cupObject), { qos: 0, retain: false });
 
@@ -137,6 +132,7 @@ function drawKeypoints() {
         fill(255, 0, 0);
         noStroke();
         ellipse(keypoint.position.x, keypoint.position.y, 30, 30);
+        //9 right hand, 10 left hand
         sendPositionMQTT("poseNet/"+i.toString() + "/" + j.toString(),keypoint.position.x, keypoint.position.y)
       }
     }
